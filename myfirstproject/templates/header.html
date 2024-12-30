@@ -1,0 +1,18 @@
+<html>
+    <head>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+        <title>{{title}}</title>
+        
+        <header>
+            <div>
+                <ul>
+                    <li>My Website</li>
+                    <li class="{% if request.path == '/' %} active {% endif %}"><a href= "{% url 'home' %}">Home</a></li>
+                    <li class="{% if request.path == '/aboutus/' %} active {% endif %}"><a href= "{% url 'aboutus' %}">About Us</a></li>
+                    <li class="{% if request.path == '/servicedetail/' %} active {% endif %}"><a href= "{% url 'servicedata' %}">service</a></li>
+                </ul>
+            </div>
+        </header>
+    </head>
+    <body>

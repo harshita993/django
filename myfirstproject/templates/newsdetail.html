@@ -1,0 +1,13 @@
+{% include "header.html" %}
+        <div>
+            <marquee onmouseover="stop()" onmouseout="start()">
+                
+                <div style="display: inline-block; margin-right: 50px; text-align: center;">
+                    <h3>{{newsdata.news_title|safe}}</h3>
+                    <p>{{newsdata.news_description|safe}}</p>
+                </div>
+                
+            </marquee>
+        </div>
+    </body>
+</html>

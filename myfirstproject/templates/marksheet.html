@@ -1,0 +1,32 @@
+{% include "header.html" %}
+<div class="container">
+    <h1>marksheet</h1>
+</div>
+<div class="">
+    <div class="row">
+        <div class="col-12">
+            <form method="post" action="">
+                
+                {% if error %}
+                <p style="color: red;">{{ error }}</p>
+                {% endif %}
+                {% csrf_token %}
+                
+                <label>subject1: </label>
+                <input type="text" name="s1" value="{{s1}}" class="form-group"></input>
+                <label>subject2: </label>
+                <input type="text" name="s2" value="{{s2}}" class="form-group"></input>
+                <label>subject3: </label>
+                <input type="text" name="s3" value="{{s3}}" class="form-group"></input>
+                <label>subject4: </label>
+                <input type="text" name="s4" value="{{s4}}" class="form-group"></input>
+                <label>subject5: </label>
+                <input type="text" name="s5" value="{{s5}}" class="form-group"></input>
+                <div>
+                    <button type="submit">Marksheet</button><br/>total:<input type="text" value="{{total}}"/>
+                    percentage:<input type="text" value="{{per}}"/></div>
+            </form>
+        </div>
+    </div>
+</div>
+</html>   
