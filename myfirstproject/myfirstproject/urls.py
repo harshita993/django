@@ -32,4 +32,6 @@ urlpatterns = [
     path('userform/', views.userform, name="userform"),
     path('newsdetail/<slug>', views.news_detail),
     path('servicedetail/', views.service_detail,name="servicedata"),
+    path('contact/', views.contact, name="contact"),
+    path('savecontact/', views.save_contact, name="save_contact"),
 ]

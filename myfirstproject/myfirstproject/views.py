@@ -3,6 +3,8 @@ from django.shortcuts import render,redirect
 from .forms import userForm
 from service.models import service
 from news.models import News
+from django.core.paginator import Paginator
+from contact_enquiry.models import Contact
 def userform(request):
     fn = userForm()
     data = {'form':fn}
@@ -141,10 +143,32 @@ def news_detail(request,slug):
 def service_detail(request):
     
     servicedata = service.objects.all()
-    if request.method == 'GET':
+    paginator = Paginator(servicedata,2)
+    page_number = request.GET.get('page')
+    servicedatafinal = paginator.get_page(page_number)
+    total_page = servicedatafinal.paginator.num_pages
+    '''if request.method == 'GET':
         st = request.GET.get('servicename')
         if st!= None:
-           servicedata = service.objects.filter(service_title__icontains=st).values('service_desc') 
-           
+           servicedata = service.objects.filter(service_title__icontains=st).values('service_desc') '''
+    data = {
+        'servicedata':servicedatafinal,
+        'lastpage':total_page,
+        'totalpagelist':[n+1 for n in range(total_page)],
+    }      
     
-    return render(request,'servicedetail.html',{'servicedata':servicedata})
+    #return render(request,'servicedetail.html',{'servicedata':servicedata})
+    return render(request,'servicedetail.html',data)
+def contact(request):
+    return render(request,'contact.html')
+def save_contact(request):
+    if request.method=='POST':
+        n=""
+        name=request.POST.get('name')
+        email=request.POST.get('email')
+        phone=request.POST.get('phone')
+        message=request.POST.get('message')
+        en=Contact(contact_name=name,contact_email=email,contact_phone=phone,contact_message=message)
+        en.save()
+        n="data inserted successfully..!"
+    return render(request,'contact.html',{'n':n})
